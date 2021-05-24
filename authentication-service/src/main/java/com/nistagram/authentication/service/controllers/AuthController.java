@@ -11,7 +11,7 @@ public class AuthController {
 	@GetMapping("/status/check")
 	public String status() {
 		
-		return "Working";
+		return "Auth Controller Working";
 	}
 
 }
