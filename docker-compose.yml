@@ -131,6 +131,27 @@ services:
         depends_on: 
             - eureka-server
 
+    agent-backend:
+        image: agent-backend
+        restart: on-failure
+        container_name: agent-backend
+        build:
+            context: ./agent-backend
+            dockerfile: Dockerfile
+        ports:
+            - 8600:8600
+        networks: 
+            - xml
+        environment:
+            DATABASE_USERNAME: root
+            DATABASE_PASSWORD: root
+            DATABASE_DOMAIN: mysql
+            DATABASE_SCHEMA: xml
+            EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+        depends_on: 
+            - mysql
+            - eureka-server
+
 volumes:
     mysql-data: {}
 
