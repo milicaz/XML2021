@@ -173,6 +173,27 @@ services:
             - mysql
             - eureka-server
 
+    media-service:
+        image: media-service
+        restart: on-failure
+        container_name: media-service
+        build: 
+            context: ./media-service
+            dockerfile: Dockerfile
+        ports: 
+            - 8400:8400
+        networks: 
+            - xml
+        environment: 
+            DATABASE_USERNAME: root
+            DATABASE_PASSWORD: root
+            DATABASE_DOMAIN: mysql
+            DATABASE_SCHEMA: xml
+            EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+        depends_on: 
+            - mysql
+            - eureka-server
+
 volumes:
     mysql-data: {}
 
