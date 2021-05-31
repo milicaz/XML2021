@@ -30,7 +30,7 @@ services:
             context: ./post-service
             dockerfile: Dockerfile
         ports:
-            - 8700:8700
+            - 8300:8300
         networks: 
             - xml
         environment: 
