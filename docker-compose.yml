@@ -22,12 +22,12 @@ services:
             - mysql
             - eureka-server
 
-    admin-service:
-        image: admin-service
+    post-service:
+        image: post-service
         restart: on-failure
-        container_name: admin-service
+        container_name: post-service
         build:
-            context: ./admin-service
+            context: ./post-service
             dockerfile: Dockerfile
         ports:
             - 8700:8700
