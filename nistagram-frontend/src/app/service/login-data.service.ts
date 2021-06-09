@@ -4,13 +4,11 @@ import { Router } from '@angular/router';
 
 export class User {
   constructor(
-    public id: number,
     public username: string,
     public password: string,
     public firstName: string,
     public lastName: string,
-    public email: string,
-    public role: string
+    public email: string
   ) { }
 }
 
@@ -18,6 +16,8 @@ export class User {
   providedIn: 'root'
 })
 export class LoginDataService {
+
+  user : User
 
   constructor(
     private http: HttpClient,
@@ -27,6 +27,10 @@ export class LoginDataService {
   executeLoginService() {
     return this.http.get<User>('http://localhost:9100/auth/all/users')
     console.log("Execute Login!")
+  }
+
+  executeRegisterService(user) {
+    return this.http.post(`http://localhost:9100/auth/user/register`, user)
   }
 
   hadleSuccessfulResponse(response, username, password) {

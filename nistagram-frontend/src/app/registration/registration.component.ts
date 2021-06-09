@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginDataService, User } from '../service/login-data.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,9 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  uname = ''
+  username = ''
+  password = ''
+  firstName = ''
+  lastName = ''
+  email = ''
+
+  user: User
+
+  constructor(
+    private userService: LoginDataService,
+    private router: Router,
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
+  }
+
+  addUser() {
+    this.user = new User(this.username, this.password, this.firstName, this.lastName, this.email)
+    this.userService.executeRegisterService(this.user)
+      .subscribe(
+        data => {
+          console.log(data)
+          this.router.navigate(['login'])
+        }
   }
 
 }
