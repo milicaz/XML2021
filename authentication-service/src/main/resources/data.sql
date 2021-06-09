@@ -1,0 +1,3 @@
+INSERT INTO `xml`.`users` (`id`, `email`, `first_name`, `last_name`, `password`, `role`, `username`) VALUES ('1', 'mail@mail.com', 'Pera', 'Peric', 'admin', 'admin', 'admin');
+INSERT INTO `xml`.`users` (`id`, `email`, `first_name`, `last_name`, `password`, `role`, `username`) VALUES ('2', 'mail1@mail.com', 'Pera', 'Peric', 'user', 'user', 'user');
+INSERT INTO `xml`.`users` (`id`, `email`, `first_name`, `last_name`, `password`, `role`, `username`) VALUES ('3', 'mail2@mail.com', 'Pera', 'Peric', 'agent', 'agent', 'agent');
