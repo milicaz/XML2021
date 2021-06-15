@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
         data => {
           console.log(data)
           this.router.navigate(['login'])
-        }
+        })
   }
 
 }

@@ -1,10 +1,49 @@
-<h1>Login</h1>
-
 <div class="container">
-    <div>
-        Username : <input type="text" name="username" [(ngModel)]="username">
-        Password : <input type="password" name="password" [(ngModel)]="password">
-
-        <button (click)=handleLogin() class="btn btn-success">Login</button>
+    <div class="wrapper">
+        <div class="header">
+            <div class="top">
+                <div class="logo">
+                    <img src="assets/images/nistagram_logo.png" alt="nistagram" style="width: 175px;">
+                </div>
+                <div class="form">
+                    <div class="input_field">
+                        <input type="text"  name="username" [(ngModel)]="username" placeholder="Username" class="input">
+                    </div>
+                    <div class="input_field">
+                        <input type="password" name="password" [(ngModel)]="password" placeholder="Password" class="input">
+                    </div>
+                    <button (click)=handleLogin() class="btn btn-success btn-block">Login</button>
+                </div>
+            </div>
+            <div class="signup">
+                <p>Don't have an account? <a routerLink="/registration">Sign up</a></p>
+            </div>
+            <div class="apps">
+                <p>Get the app.</p>
+                <div class="icons">
+                    <a href="#"><img src="assets/images/appstore.png" alt="appstore"></a>
+                    <a href="#"><img src="assets/images/googleplay.png" alt="googleplay"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="links">
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Top Accounts</a></li>
+                    <li><a href="#">Hashtags</a></li>
+                    <li><a href="#">Language</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                © 2021 NISTAGRAM
+            </div>
+        </div>
     </div>
 </div>
