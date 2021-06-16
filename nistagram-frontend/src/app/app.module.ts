@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FriendsComponent } from './friends/friends.component';
     LogoutComponent,
     RegistrationComponent,
     ProfileComponent,
-    FriendsComponent
+    FriendsComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
