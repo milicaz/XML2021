@@ -8,7 +8,8 @@ export class User {
     public password: string,
     public firstName: string,
     public lastName: string,
-    public email: string
+    public email: string,
+    public role: string
   ) { }
 }
 
@@ -30,7 +31,7 @@ export class LoginDataService {
   }
 
   executeRegisterService(user) {
-    return this.http.post(`http://localhost:9100/auth/user/register`, user)
+    return this.http.post<User>(`http://localhost:9100/auth/user/register`, user)
   }
 
   hadleSuccessfulResponse(response, username, password) {

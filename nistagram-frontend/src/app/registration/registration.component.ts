@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   firstName = ''
   lastName = ''
   email = ''
+  role = 'user'
 
   user: User
 
@@ -29,13 +30,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   addUser() {
-    this.user = new User(this.username, this.password, this.firstName, this.lastName, this.email)
+    this.user = new User(this.username, this.password, this.firstName, this.lastName, this.email, this.role)
     this.userService.executeRegisterService(this.user)
       .subscribe(
         data => {
           console.log(data)
           this.router.navigate(['login'])
         }
+      )
   }
 
 }
