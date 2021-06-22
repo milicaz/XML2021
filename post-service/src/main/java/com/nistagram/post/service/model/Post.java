@@ -3,6 +3,8 @@ package com.nistagram.post.service.model;
 import java.time.Instant;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,6 +30,7 @@ public class Post {
 	private Instant createdAt;
 	private String urlMedia;
 	private String caption;
+	@Enumerated(EnumType.STRING)
 	private PostType type;
 	@LastModifiedBy
 	private String lastModifiedBy;

@@ -10,7 +10,7 @@ import com.nistagram.post.service.model.Post;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 	
+	Post findOneById(Long id);
 	List<Post> findAll();
-	Post findOne(Long id);	
 	List<Post> findByUsername(String username);
 }
