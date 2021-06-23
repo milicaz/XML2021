@@ -65,7 +65,7 @@ public class MediaController {
 	@PostMapping(path = "/upload", consumes = "multipart/form-data")
 	public ResponseEntity uploadImage(@RequestParam("file") MultipartFile file) {
 		try {
-			Images img = new Images(compressBytes(file.getBytes()));
+			Images img = new Images(file.getBytes());
 			imgRepository.save(img);
 			return new ResponseEntity<>(img, HttpStatus.OK);
 
