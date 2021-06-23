@@ -10,6 +10,7 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           </form>
         </div>
+        <!--U divu posle ovog komentara stoji *ngIf="loginService.isUserLoggedIn()"-->
         <div class="d-flex flex-row" *ngIf="loginService.isUserLoggedIn()">
           <ul class="list-inline m-0">
             <li class="list-inline-item">
@@ -34,7 +35,7 @@
             </li>
             <li class="list-inline-item ml-2">
               <a routerLink="/profile" class="link-menu nav-link">
-                <svg width="1.5em" height="1,5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                   <path fill-rule="evenodd"
@@ -68,10 +69,17 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
+        <input type="file" (change)="selectFile($event)">
+        <div class="alert alert-light" role="alert">{{ message }}</div>
+        <div>
+          <form>
+            <input class="w-100 border-0 p-3 input-post" placeholder="Caption...">
+          </form>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-default">Share</button>
+        <button type="button" class="btn btn-primary" [disabled]="!selectedFile" (click)="upload()">Share</button>
       </div>
     </div>
   </div>
