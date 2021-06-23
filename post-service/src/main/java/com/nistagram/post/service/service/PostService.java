@@ -15,7 +15,7 @@ public class PostService {
 	private PostRepository postRepository;
 	
 	public Post findOne(Long id) {
-		Post post = postRepository.findOne(id);
+		Post post = postRepository.findOneById(id);
 		return post;
 	}
 	
