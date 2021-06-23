@@ -2,6 +2,7 @@ package com.nistagram.media.service.controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
@@ -39,8 +40,8 @@ import com.nistagram.media.service.repository.ImgRepository;
 @RequestMapping(value = "/media")
 public class MediaController {
 
-	@Autowired
-	ImageRepository imageRepository;
+//	@Autowired
+//	ImageRepository imageRepository;
 	
 	@Autowired
 	ImgRepository imgRepository;
@@ -63,9 +64,9 @@ public class MediaController {
 //	}
 
 	@PostMapping(path = "/upload", consumes = "multipart/form-data")
-	public ResponseEntity uploadImage(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity uploadImage(@RequestParam("imageFile") MultipartFile file) {
 		try {
-			Images img = new Images(file.getBytes());
+			Images img = new Images(file.getBytes(), file.getOriginalFilename());
 			imgRepository.save(img);
 			return new ResponseEntity<>(img, HttpStatus.OK);
 
@@ -75,14 +76,24 @@ public class MediaController {
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-
-	@GetMapping(path = { "/get/{imageName}" })
-	public ImageModel getImage(@PathVariable("imageName") String imageName) throws IOException {
-		final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
-		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
-				decompressBytes(retrievedImage.get().getPicByte()));
+	
+	@GetMapping(path ="/get/{imageName}")
+	public Images getImage(@PathVariable("imageName") String imageName) throws IOException {
+		System.out.println("Repo " + imgRepository.findByName(imageName));
+		final Optional<Images> retreivedImage = imgRepository.findByName(imageName);
+		System.out.println("Name je " + retreivedImage.get().getName());
+		Images img = new Images(retreivedImage.get().getPicByte(), retreivedImage.get().getName());
 		return img;
+		
 	}
+
+//	@GetMapping(path = { "/get/{imageName}" })
+//	public ImageModel getImage(@PathVariable("imageName") String imageName) throws IOException {
+//		final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
+//		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
+//				decompressBytes(retrievedImage.get().getPicByte()));
+//		return img;
+//	}
 
 	// compress the image bytes before storing it in the database
 	public static byte[] compressBytes(byte[] data) {
