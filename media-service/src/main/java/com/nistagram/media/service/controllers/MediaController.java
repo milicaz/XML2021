@@ -2,20 +2,26 @@ package com.nistagram.media.service.controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.CompletionContext.Status;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.nistagram.media.service.model.ImageModel;
+import com.nistagram.media.service.model.Images;
 import com.nistagram.media.service.repository.ImageRepository;
+import com.nistagram.media.service.repository.ImgRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @EnableWebMvc
@@ -33,6 +41,9 @@ public class MediaController {
 
 	@Autowired
 	ImageRepository imageRepository;
+	
+	@Autowired
+	ImgRepository imgRepository;
 
 	@GetMapping("/status/check")
 	public String status() {
@@ -40,13 +51,29 @@ public class MediaController {
 		return "Media Controller Working";
 	}
 
-	@PostMapping(path = "/upload")
-	public BodyBuilder uplaodImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
-		System.out.println("Original Image Byte Size - " + file.getBytes().length);
-		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
-				compressBytes(file.getBytes()));
-		imageRepository.save(img);
-		return ResponseEntity.status(HttpStatus.OK);
+	//consumes = "multipart/form-data"
+//	@PostMapping(path = "/upload", consumes = "multipart/form-data")
+//
+//	public BodyBuilder uplaodImage(@RequestParam String imageFile, MultipartFile file) throws IOException {
+//		System.out.println("Original Image Byte Size - " + file.getBytes().length);
+//		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
+//				compressBytes(file.getBytes()));
+//		imageRepository.save(img);
+//		return ResponseEntity.status(HttpStatus.OK);
+//	}
+
+	@PostMapping(path = "/upload", consumes = "multipart/form-data")
+	public ResponseEntity uploadImage(@RequestParam("file") MultipartFile file) {
+		try {
+			Images img = new Images(compressBytes(file.getBytes()));
+			imgRepository.save(img);
+			return new ResponseEntity<>(img, HttpStatus.OK);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping(path = { "/get/{imageName}" })
