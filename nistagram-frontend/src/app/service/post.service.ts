@@ -7,6 +7,9 @@ export class Post {
     public username: string,
     public urlMedia: string,
     public caption: string,
+    public totalLikes: number = 0,
+    public totalDislikes: number = 0,
+    public favorite: false
   ) { }
 }
 

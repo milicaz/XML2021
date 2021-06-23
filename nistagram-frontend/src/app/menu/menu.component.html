@@ -1,48 +1,78 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container justify-content-center">
-        <div class="d-flex flex-row justify-content-between col-7">
-          <a class="navbar-brand" routerLink="/welcome">
-            <img src="assets/images/nistagram_logo_transperent.png" height="40" alt="" loading="lazy">
-          </a>
-          <div>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
-          </div>
-          <div class="d-flex flex-row" *ngIf="loginService.isUserLoggedIn()">
-            <ul class="list-inline m-0">
-              <li class="list-inline-item">
-                <a routerLink="/welcome" class="link-menu nav-link">
-                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-house-door-fill"
-                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M6.5 10.995V14.5a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5V11c0-.25-.25-.5-.5-.5H7c-.25 0-.5.25-.5.495z" />
-                    <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-                  </svg>
-                </a>
-              </li>
-              <li class="list-inline-item ml-2">
-                <a routerLink="/profile" class="link-menu nav-link">
-                  <svg width="1.5em" height="1,5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path fill-rule="evenodd"
-                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </div>
+    <div class="container justify-content-center">
+      <div class="d-flex flex-row justify-content-between col-7">
+        <a class="navbar-brand" routerLink="/welcome">
+          <img src="assets/images/nistagram_logo_transperent.png" height="40" alt="" loading="lazy">
+        </a>
+        <div>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          </form>
         </div>
-        <div class="navbar-nav navbar-collapse justify-content-end">
-          <li class="list-inline-item"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login"
-              class="btn btn-primary">Login</a></li>
-          <li class="list-inline-item ml-2"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/registration"
-              class="btn btn-primary">Sign up</a></li>
-          <li class="list-inline-item ml-2"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout"
-              class="btn btn-primary">Logout</a></li>
+        <div class="d-flex flex-row" *ngIf="loginService.isUserLoggedIn()">
+          <ul class="list-inline m-0">
+            <li class="list-inline-item">
+              <a routerLink="/welcome" class="link-menu nav-link">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-house-door-fill" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M6.5 10.995V14.5a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5V11c0-.25-.25-.5-.5-.5H7c-.25 0-.5.25-.5.495z" />
+                  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                </svg>
+              </a>
+            </li>
+            <li class="list-inline-item ml-2">
+              <a class="link-menu nav-link" type="button" data-toggle="modal" data-target="#newPostModal">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+              </a>
+            </li>
+            <li class="list-inline-item ml-2">
+              <a routerLink="/profile" class="link-menu nav-link">
+                <svg width="1.5em" height="1,5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                  <path fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
+      <div class="navbar-nav navbar-collapse justify-content-end">
+        <li class="list-inline-item"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login"
+            class="btn btn-primary">Login</a></li>
+        <li class="list-inline-item ml-2"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/registration"
+            class="btn btn-primary">Sign up</a></li>
+        <li class="list-inline-item ml-2"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout"
+            class="btn btn-primary">Logout</a></li>
+      </div>
+    </div>
   </nav>
 </header>
+
+
+<!-- Modal -->
+<div id="newPostModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create new post</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
