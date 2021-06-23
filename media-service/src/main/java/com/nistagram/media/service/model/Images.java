@@ -14,6 +14,7 @@ public class Images {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String name;
 	@Lob
 	private byte[] picByte;
 	
@@ -23,9 +24,19 @@ public class Images {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Images(byte[] picByte) {
+	public Images(byte[] picByte, String name) {
 		super();
 		this.picByte = picByte;
+		this.name = name;
+	}
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Long getId() {
 		return id;

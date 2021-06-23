@@ -48,12 +48,13 @@ export class ProfileComponent implements OnInit {
   //Gets called when the user clicks on retieve image button to get the image from back end
   getImage() {
     //Make a call to Sprinf Boot to get the Image Bytes.
-    this.httpClient.get('http://localhost:8400/media/get/' + this.imageName)
+    this.httpClient.get(`http://localhost:8400/media/get/${this.imageName}`)
       .subscribe(
         res => {
           this.retrieveResonse = res;
           this.base64Data = this.retrieveResonse.picByte;
-          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+          //  this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+          this.retrievedImage = 'base64,' + this.base64Data;
         }
       );
   }
