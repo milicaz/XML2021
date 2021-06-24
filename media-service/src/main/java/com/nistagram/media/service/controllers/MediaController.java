@@ -66,7 +66,12 @@ public class MediaController {
 	@PostMapping(path = "/upload", consumes = "multipart/form-data")
 	public ResponseEntity uploadImage(@RequestParam("imageFile") MultipartFile file) {
 		try {
-			Images img = new Images(file.getBytes(), file.getOriginalFilename());
+			String[] a = file.getOriginalFilename().split("\\.");
+			
+			System.out.println("Strin a " + a[0]);
+			
+			Images img = new Images(file.getBytes(), a[0]);
+			//System.out.println("File get name" + file.getName());
 			imgRepository.save(img);
 			return new ResponseEntity<>(img, HttpStatus.OK);
 
@@ -77,21 +82,88 @@ public class MediaController {
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+//	@GetMapping(path ="/get/{imageName}")
+//	public Images getImage(@PathVariable("imageName") String imageName) throws IOException {
+//		System.out.println("Repo " + imgRepository.findByName(imageName));
+//		Collection<Images> retreivedImage = imgRepository.findByName(imageName);
+//		for(Images image : retreivedImage) {
+//			if(image.getName().equals(imageName)) {
+//				Images img = new Images(image.getPicByte(), image.getName());
+//				System.out.println("Img je " + img);
+//				return img;
+//			}else {
+//				System.out.println("Ne postoji slika sa tim imenom");
+//			}
+//		}
+////		System.out.println("Name je " + retreivedImage.get().getName());
+////		Images img = new Images();
+//		return null;
+//	}
+	
+	//Ova radi
 	@GetMapping(path ="/get/{imageName}")
-	public Images getImage(@PathVariable("imageName") String imageName) throws IOException {
+	public ResponseEntity<Images> getImage(@PathVariable("imageName") String imageName) throws IOException {
+		try {
+			
+			int secondsToSleep = 1;
+			Thread.sleep(secondsToSleep * 10);
 		System.out.println("Repo " + imgRepository.findByName(imageName));
-		final Optional<Images> retreivedImage = imgRepository.findByName(imageName);
-		System.out.println("Name je " + retreivedImage.get().getName());
-		Images img = new Images(retreivedImage.get().getPicByte(), retreivedImage.get().getName());
-		return img;
-		
+		Collection<Images> retreivedImage = imgRepository.findByName(imageName);
+		for(Images image : retreivedImage) {
+			if(image.getName().equals(imageName)) {
+				Images img = new Images(image.getPicByte(), image.getName());
+				System.out.println("Img je " + img);
+				return new ResponseEntity<>(img, HttpStatus.OK);
+			}else {
+				System.out.println("Ne postoji slika sa tim imenom");
+			}
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+//		System.out.println("Name je " + retreivedImage.get().getName());
+//		Images img = new Images();
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
+	//		@GetMapping(path ="/get")
+//		public ResponseEntity<Images> getImage(String imageName) throws IOException {
+//			try {
+//				
+//			
+//			System.out.println("Repo " + imgRepository.findByName(imageName));
+//			Collection<Images> retreivedImage = imgRepository.findByName(imageName);
+//			for(Images image : retreivedImage) {
+//				if(image.getName().equals(imageName)) {
+//					Images img = new Images(image.getPicByte(), image.getName());
+//					System.out.println("Img je " + img);
+//					return new ResponseEntity<>(img, HttpStatus.OK);
+//				}else {
+//					System.out.println("Ne postoji slika sa tim imenom");
+//				}
+//			}
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+////			System.out.println("Name je " + retreivedImage.get().getName());
+////			Images img = new Images();
+//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//		}
+	
+//	@GetMapping(path ="/get/{id}")
+//	public ResponseEntity<Images> getImage(@PathVariable("id") Long id) throws IOException {
+//		try {
+//			final Optional<Images> retreivedImage = imgRepository.;
+//			Ima
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//	}
+
 //	@GetMapping(path = { "/get/{imageName}" })
-//	public ImageModel getImage(@PathVariable("imageName") String imageName) throws IOException {
-//		final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
-//		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
-//				decompressBytes(retrievedImage.get().getPicByte()));
+//	public Images getImage(@PathVariable("imageName") String imageName) throws IOException {
+//		final Optional<Images> retrievedImage = imgRepository.findByName(imageName);
+//		Images img = new Images(retrievedImage.get().getPicByte(), retrievedImage.get().getName());
 //		return img;
 //	}
 

@@ -31,7 +31,13 @@
 <div class="container row">
   <div class="col-md-12">
     <div *ngIf=retrievedImage>
-      <img [src]="retrievedImage">
+      <img [src]="retrievedImage" alt="Slika nije nadjena">
     </div>
+  </div>
+</div>
+
+<div class="container row">
+  <div class="col-md-6">
+    <input type="button" (click)="share()" value="Share">
   </div>
 </div>

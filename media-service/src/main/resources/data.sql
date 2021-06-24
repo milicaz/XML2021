@@ -1,1 +1,0 @@
-INSERT INTO `xml`.`img` (`id`, `pic_byte`) VALUES ('1', LOAD_FILE('C:/Users/Milica/Desktop/xml2021/XML2021/ruza.jpg'));

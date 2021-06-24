@@ -10,6 +10,6 @@ import com.nistagram.media.service.model.Images;
 
 public interface ImgRepository extends JpaRepository<Images, Long> {
 
-	Optional<Images> findByName(String name);
-//	Collection<Images> findByName(String name);
+//	Optional<Images> findByName(String name);
+	Collection<Images> findByName(String name);
 }

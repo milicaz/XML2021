@@ -32,6 +32,14 @@ public class Images {
 	
 	
 	
+	
+	
+	public Images(Long id, String name, byte[] picByte) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.picByte = picByte;
+	}
 	public String getName() {
 		return name;
 	}

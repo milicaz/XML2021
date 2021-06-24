@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: "profile", component: ProfileComponent },
   { path: "friends", component: FriendsComponent },
   { path: "posts", component: PostComponent },
+  { path: "retrievedImage", component: ProfileComponent}
 ];
 
 @NgModule({
