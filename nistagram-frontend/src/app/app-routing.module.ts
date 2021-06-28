@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { FriendsComponent } from "./friends/friends.component";
+import { InfoUpdateComponent } from "./info-update/info-update.component";
 import { LoginComponent } from "./login/login.component";
 import { LogoutComponent } from "./logout/logout.component";
 import { PostComponent } from "./post/post.component";
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: "profile", component: ProfileComponent },
   { path: "friends", component: FriendsComponent },
   { path: "posts", component: PostComponent },
-  { path: "retrievedImage", component: ProfileComponent}
+  { path: "retrievedImage", component: ProfileComponent},
+  { path: "update", component: InfoUpdateComponent}
 ];
 
 @NgModule({

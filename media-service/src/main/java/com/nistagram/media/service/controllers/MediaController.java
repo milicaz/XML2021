@@ -106,7 +106,7 @@ public class MediaController {
 		try {
 			
 			int secondsToSleep = 1;
-			Thread.sleep(secondsToSleep * 10);
+			Thread.sleep(secondsToSleep * 60);
 		System.out.println("Repo " + imgRepository.findByName(imageName));
 		Collection<Images> retreivedImage = imgRepository.findByName(imageName);
 		for(Images image : retreivedImage) {

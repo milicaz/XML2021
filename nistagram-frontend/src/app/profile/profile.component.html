@@ -1,15 +1,15 @@
 <div class="container row">
   <div class="col-md-12">
-    <h1>Upload Image</h1>
+    <!-- <h1>Upload Image</h1> -->
   </div>
 </div>
 <div class="container row">
   <div class="col-md-6">
     <input type="file" (change)="onFileChanged($event)">
   </div>
-  <div class="col-md-6">
+  <!-- <div class="col-md-6">
     <input type="button" (click)="onUpload()" value="upload">
-  </div>
+  </div> -->
 </div>
 
 <hr />
@@ -18,7 +18,7 @@
     <div *ngIf=message>{{message}}</div>
   </div>
 </div>
-
+<!-- 
 <div class="container row">
   <div class="col-md-6">
     <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName" name="name" />
@@ -26,13 +26,45 @@
   <div class="col-md-6">
     <input type="button" (click)="getImage()" value="Get Image">
   </div>
-</div>
+</div> -->
 
 <div class="container row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div *ngIf=retrievedImage>
-      <img [src]="retrievedImage" alt="Slika nije nadjena">
+      <img [src]="retrievedImage" alt="Slika nije nadjena" width=40% height=80%>
     </div>
+  </div>
+  <div class="col-md-6">
+    <div>
+      <Label>Username: </Label>
+      <input type="text" [(ngModel)]="username" class="form-control-plaintext" name="username" required="required"
+        readonly>
+    </div>
+    <div>
+      <label>First name: </label>
+      <input type="text" [(ngModel)]="firstName" class="form-control-plaintext" name="firstName" required="required"
+        readonly>
+    </div>
+    <div>
+      <label>Last name: </label>
+      <input type="text" [(ngModel)]="lastName" class="form-control-plaintext" name="lastName" required="required"
+        readonly>
+    </div>
+    <div>
+      <label>Email: </label>
+      <input type="text" [(ngModel)]="email" class="form-control-plaintext" name="email" required="required" readonly>
+    </div>
+    <div>
+      <label>Date of birth: </label>
+      <input type="text" [(ngModel)]="dateOfBirth" class="form-control-plaintext" name="dateOfBirth" required="required"
+        readonly>
+    </div>
+    <div>
+      <label>Phone number: </label>
+      <input type="text" [(ngModel)]="phone" class="form-control-plaintext" name="phone" required="required" readonly>
+    </div>
+
+    <input type="button" (click)="change()" value="Change">
   </div>
 </div>
 

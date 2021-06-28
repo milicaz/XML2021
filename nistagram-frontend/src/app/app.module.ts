@@ -14,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component';
 import { PostComponent } from './post/post.component';
 import { StoryComponent } from './story/story.component';
+import { InfoUpdateComponent } from './info-update/info-update.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StoryComponent } from './story/story.component';
     ProfileComponent,
     FriendsComponent,
     PostComponent,
-    StoryComponent
+    StoryComponent,
+    InfoUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,3 @@
+INSERT INTO `xml`.`profiles` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `username`) VALUES ('1', 'date', 'mail@mail.com', 'Pera', 'Peric', '11111', 'admin');
+INSERT INTO `xml`.`profiles` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `username`) VALUES ('2', 'date', 'mail1@mail.com', 'Pera', 'Peric', '11111', 'user');
+INSERT INTO `xml`.`profiles` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `username`) VALUES ('3', 'date', 'mail2@mail.com', 'Pera', 'Peric', '11111', 'agent');

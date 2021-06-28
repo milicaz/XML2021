@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
+import { Router } from '@angular/router';
 import { PictureUploadService } from '../service/picture-upload.service';
+import { ProfileService } from '../service/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,13 +19,34 @@ export class ProfileComponent implements OnInit {
   retrievedImage: any
   selectedFile: File
 
+  username: any
+  firstName: any
+  lastName: any
+  email: any
+  dateOfBirth: any
+  phone: any
+  retResponse: any
+
 
   constructor(
     private httpClient: HttpClient,
-    private pictureService : PictureUploadService
+    private pictureService : PictureUploadService,
+    private router : Router,
+    private profileService : ProfileService
     ) { }
 
   ngOnInit() {
+    this.username = sessionStorage.getItem('logUser')
+    // console.log("Username je: " + this.username)
+    this.profileService.executeProfileService(this.username).subscribe(
+      response => {
+      this.firstName = response.firstName,
+      this.lastName = response.lastName,
+      this.email = response.email,
+      this.dateOfBirth = response.dateOfBirth,
+      this.phone = response.phone
+    }
+    )
   }
 
   //Gets called when the user selects an image
@@ -108,6 +131,11 @@ export class ProfileComponent implements OnInit {
       }
     )
 
+  }
+
+  change() {
+
+    this.router.navigate(['update'])
   }
 
 }
