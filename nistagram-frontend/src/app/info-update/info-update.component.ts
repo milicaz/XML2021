@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profile, ProfileService } from '../service/profile.service';
-import { }
 
 @Component({
   selector: 'app-info-update',
