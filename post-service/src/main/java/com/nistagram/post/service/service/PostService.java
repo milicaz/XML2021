@@ -1,4 +1,4 @@
-package com.nistagram.post.service.service;
+/*package com.nistagram.post.service.service;
 
 import java.util.List;
 
@@ -35,4 +35,4 @@ public class PostService {
 		postRepository.deleteById(id);
 	}
 
-}
+}*/

@@ -3,8 +3,6 @@ package com.nistagram.post.service.model;
 import java.time.Instant;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,8 +12,6 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import com.nistagram.post.service.enums.PostType;
 
 @Entity
 @Table(name = "posts")
@@ -30,8 +26,6 @@ public class Post {
 	private Instant createdAt;
 	private String urlMedia;
 	private String caption;
-	@Enumerated(EnumType.STRING)
-	private PostType type;
 	@LastModifiedBy
 	private String lastModifiedBy;
 	@LastModifiedDate
@@ -83,14 +77,6 @@ public class Post {
 		this.caption = caption;
 	}
 
-	public PostType getType() {
-		return type;
-	}
-
-	public void setType(PostType type) {
-		this.type = type;
-	}
-
 	public String getLastModifiedBy() {
 		return lastModifiedBy;
 	}
@@ -129,6 +115,13 @@ public class Post {
 
 	public void setFavorite(Boolean favorite) {
 		this.favorite = favorite;
+	}
+
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", username=" + username + ", createdAt=" + createdAt + ", urlMedia=" + urlMedia
+				+ ", caption=" + caption + ", lastModifiedBy=" + lastModifiedBy + ", updatedAt=" + updatedAt
+				+ ", totalLikes=" + totalLikes + ", totalDislikes=" + totalDislikes + ", favorite=" + favorite + "]";
 	}
 
 }

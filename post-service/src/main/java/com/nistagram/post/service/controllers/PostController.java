@@ -1,42 +1,110 @@
 package com.nistagram.post.service.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nistagram.post.service.model.Post;
-import com.nistagram.post.service.service.PostService;
+import com.nistagram.post.service.repository.PostRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/post")
 public class PostController {
-	
+
 	@Autowired
-	PostService postService;
-	
+	PostRepository postRepostitory;
+
 	@GetMapping("/status/check")
 	public String status() {
-		
+
 		return "Post Controller Working";
 	}
-	
+
 	@GetMapping("/all")
-	public ResponseEntity<?> getAllPosts(){
-		List<Post> posts = postService.findAll();
+	public ResponseEntity<?> getAllPosts() {
+		List<Post> posts = postRepostitory.findAll();
 		return new ResponseEntity<>(posts, HttpStatus.OK);
 	}
-	
-	@GetMapping("/{postId}")
-	public ResponseEntity<?> getPost(@PathVariable Long postId){
-		return new ResponseEntity<>(postService.findOne(postId), HttpStatus.OK);
+
+	@GetMapping("/getUsername/{username}")
+	public ResponseEntity<?> getAllPostsByUsername(@PathVariable("username") String username) {
+		try {
+			List<Post> posts = postRepostitory.findByUsername(username);
+			if (posts.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(posts, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/get/{postId}")
+	public ResponseEntity<?> getPost(@PathVariable("postId") Long postId) {
+		Optional<Post> postData = postRepostitory.findById(postId);
+
+		if (postData.isPresent()) {
+			return new ResponseEntity<>(postData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PostMapping("/create")
+	public ResponseEntity<?> createPost(@RequestBody Post post) {
+		try {
+			Post _post = postRepostitory.save(post);
+			return new ResponseEntity<>(_post, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PutMapping("/update/{id}")
+	public ResponseEntity<Post> updatePost(@PathVariable("id") Long id, @RequestBody Post post) {
+		Optional<Post> postData = postRepostitory.findById(id);
+		
+		if(postData.isPresent()) {
+			Post _post = postData.get();
+			_post.setCaption(post.getCaption());
+			return new ResponseEntity<Post>(postRepostitory.save(_post), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<HttpStatus> deletePost(@PathVariable("id") Long id) {
+		try {
+			postRepostitory.deleteById(id);
+			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
+	@DeleteMapping("/all")
+	public ResponseEntity<HttpStatus> deleteAllPosts() {
+		try {
+			postRepostitory.deleteAll();
+			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }
