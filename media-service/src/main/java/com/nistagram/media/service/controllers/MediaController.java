@@ -124,6 +124,8 @@ public class MediaController {
 	@GetMapping(path = "/get/image/{username}")
 	public ResponseEntity<Images> getImg(@PathVariable("username") String username) {
 		try {
+			int secondsToSleep = 1;
+			Thread.sleep(secondsToSleep * 60);
 			System.out.println("Repo " + imgRepository.findAllByUsername(username));
 			Collection<Images> retreivedImage = imgRepository.findAllByUsername(username);
 			for (Images image : retreivedImage) {
