@@ -63,7 +63,8 @@
 
     <fieldset class="form-group" class="col-md-6">
       <label>Date of birth</label>
-      <input type="password" [(ngModel)]="dateOfBirth" class="form-control" name="password" required="required">
+      <input type="date" [ngModel]="dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="dateOfBirth = $event"
+        class="form-control" name="password" required="required">
     </fieldset>
 
     <fieldset class="form-group" class="col-md-6">

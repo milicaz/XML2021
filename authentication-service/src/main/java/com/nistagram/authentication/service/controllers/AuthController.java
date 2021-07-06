@@ -8,9 +8,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.CompletionContext.Status;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +45,24 @@ public class AuthController {
 		
 	}
 	
+	@GetMapping("/user/{username}")
+	public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username){
+		try {
+			List<User> users = urepo.findAllByUsername(username);
+			for(User u : users) {
+				if(u.getUsername().equals(username)){
+					return new ResponseEntity<>(u, HttpStatus.OK);
+			}else {
+				System.out.println("User ne postoji.");
+			}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
 	@PostMapping(path = "/user/register", consumes = "application/json" )
 	public Status registerUser(@Valid @RequestBody User newUser) {
 		List<User> users = urepo.findAll();
@@ -55,6 +76,8 @@ public class AuthController {
         urepo.save(newUser);
 		return Status.SUCCESS;
 	}
+	
+	
 	
 
 }

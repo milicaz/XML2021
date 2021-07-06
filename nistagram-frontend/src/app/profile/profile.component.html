@@ -4,13 +4,13 @@
   </div>
 </div>
 <div class="container row">
-  <div class="col-md-6">
+  <div class="col-md-3">
     <input type="file" (change)="onFileChanged($event)">
   </div>
-  <!-- <div class="col-md-6">
-    <input type="button" (click)="onUpload()" value="upload">
-  </div> -->
-</div>
+    <div class="col-md-3">
+      <input type="button" (click)="share()" value="Share">
+    </div>
+  </div>
 
 <hr />
 <div class="container row">
@@ -34,42 +34,43 @@
       <img [src]="retrievedImage" alt="Slika nije nadjena" width=40% height=80%>
     </div>
   </div>
+
   <div class="col-md-6">
-    <div>
-      <Label>Username: </Label>
-      <input type="text" [(ngModel)]="username" class="form-control-plaintext" name="username" required="required"
-        readonly>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Username: </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span><input type="text" [(ngModel)]="username" class="col-sm-4" class="form-control-plaintext" name="username" required="required"
+        readonly></span>
     </div>
-    <div>
-      <label>First name: </label>
-      <input type="text" [(ngModel)]="firstName" class="form-control-plaintext" name="firstName" required="required"
-        readonly>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">First name: </label>
+      <span><input type="text" [(ngModel)]="firstName" class="col-sm-4" class="form-control-plaintext" name="firstName" required="required"
+        readonly></span>
     </div>
-    <div>
-      <label>Last name: </label>
-      <input type="text" [(ngModel)]="lastName" class="form-control-plaintext" name="lastName" required="required"
-        readonly>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Last name: </label>
+      <span><input type="text" [(ngModel)]="lastName" class="col-sm-4" class="form-control-plaintext" name="lastName" required="required"
+        readonly></span>
     </div>
-    <div>
-      <label>Email: </label>
-      <input type="text" [(ngModel)]="email" class="form-control-plaintext" name="email" required="required" readonly>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Email: </label>
+      <span><input type="text" [(ngModel)]="email" class="col-sm-4" class="form-control-plaintext" name="email" required="required" readonly></span>
     </div>
-    <div>
-      <label>Date of birth: </label>
-      <input type="text" [(ngModel)]="dateOfBirth" class="form-control-plaintext" name="dateOfBirth" required="required"
-        readonly>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Date of birth: </label>
+      <span><input type="date" [ngModel]="dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange) = "dateOfBirth = $event"  class="col-sm-4" class="form-control-plaintext" name="dateOfBirth" required="required"
+        readonly></span>
     </div>
-    <div>
-      <label>Phone number: </label>
-      <input type="text" [(ngModel)]="phone" class="form-control-plaintext" name="phone" required="required" readonly>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label">Phone number: </label>
+      <span><input type="text" [(ngModel)]="phone" class="col-sm-4" class="form-control-plaintext" name="phone" required="required" readonly></span>
     </div>
 
     <input type="button" (click)="change()" value="Change">
   </div>
 </div>
 
-<div class="container row">
+<!-- <div class="container row">
   <div class="col-md-6">
     <input type="button" (click)="share()" value="Share">
   </div>
-</div>
+</div> -->

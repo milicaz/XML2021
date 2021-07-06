@@ -2,6 +2,7 @@ package com.nistagram.media.service.controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -63,17 +64,37 @@ public class MediaController {
 //		return ResponseEntity.status(HttpStatus.OK);
 //	}
 
-	@PostMapping(path = "/upload", consumes = "multipart/form-data")
-	public ResponseEntity uploadImage(@RequestParam("imageFile") MultipartFile file) {
+	@PostMapping(path = "/upload/{username}", consumes = "multipart/form-data")
+	public ResponseEntity uploadImage(@RequestParam("imageFile") MultipartFile file,
+			@PathVariable("username") String username) {
 		try {
 			String[] a = file.getOriginalFilename().split("\\.");
-			
+
 			System.out.println("Strin a " + a[0]);
-			
-			Images img = new Images(file.getBytes(), a[0]);
-			//System.out.println("File get name" + file.getName());
-			imgRepository.save(img);
-			return new ResponseEntity<>(img, HttpStatus.OK);
+			Images img = new Images(file.getBytes(), a[0], username);
+			System.out.println("Poredjenje:  " + Arrays.equals(file.getBytes(), img.getPicByte()));
+			// System.out.println("File get name" + file.getName());
+//			Collection<Images> slike = imgRepository.findByPicByte(img.getPicByte());
+			List<Images> slike = imgRepository.findAll();
+			System.out.println("Slike su: " + slike);
+			if (slike.isEmpty()) {
+				imgRepository.save(img);
+				return new ResponseEntity<>(img, HttpStatus.OK);
+			} else {
+				for (Images i : slike) {
+					boolean b = Arrays.equals(i.getPicByte(), img.getPicByte());
+					System.out.println("B je: " + b);
+					if (b == true) {
+						System.out.println("Slika vec postoji");
+					} else {
+						if(i.getUsername().equals(username)) {
+							imgRepository.delete(i);
+						}
+						imgRepository.save(img);
+						return new ResponseEntity<>(img, HttpStatus.OK);
+					}
+				}
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -100,24 +121,46 @@ public class MediaController {
 //		return null;
 //	}
 	
-	//Ova radi
-	@GetMapping(path ="/get/{imageName}")
+	@GetMapping(path = "/get/image/{username}")
+	public ResponseEntity<Images> getImg(@PathVariable("username") String username) {
+		try {
+			System.out.println("Repo " + imgRepository.findAllByUsername(username));
+			Collection<Images> retreivedImage = imgRepository.findAllByUsername(username);
+			for (Images image : retreivedImage) {
+				if (image.getUsername().equals(username)) {
+					Images img = new Images(image.getPicByte(), image.getName(), image.getUsername());
+					System.out.println("Img je " + img);
+					return new ResponseEntity<>(img, HttpStatus.OK);
+				} else {
+					System.out.println("Ne postoji slika sa tim imenom");
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+//			System.out.println("Name je " + retreivedImage.get().getName());
+//			Images img = new Images();
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+
+	// Ova radi
+	@GetMapping(path = "/get/{imageName}")
 	public ResponseEntity<Images> getImage(@PathVariable("imageName") String imageName) throws IOException {
 		try {
-			
+
 			int secondsToSleep = 1;
 			Thread.sleep(secondsToSleep * 60);
-		System.out.println("Repo " + imgRepository.findByName(imageName));
-		Collection<Images> retreivedImage = imgRepository.findByName(imageName);
-		for(Images image : retreivedImage) {
-			if(image.getName().equals(imageName)) {
-				Images img = new Images(image.getPicByte(), image.getName());
-				System.out.println("Img je " + img);
-				return new ResponseEntity<>(img, HttpStatus.OK);
-			}else {
-				System.out.println("Ne postoji slika sa tim imenom");
+			System.out.println("Repo " + imgRepository.findByName(imageName));
+			Collection<Images> retreivedImage = imgRepository.findByName(imageName);
+			for (Images image : retreivedImage) {
+				if (image.getName().equals(imageName)) {
+					Images img = new Images(image.getPicByte(), image.getName(), image.getUsername());
+					System.out.println("Img je " + img);
+					return new ResponseEntity<>(img, HttpStatus.OK);
+				} else {
+					System.out.println("Ne postoji slika sa tim imenom");
+				}
 			}
-		}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

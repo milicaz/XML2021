@@ -25,4 +25,8 @@ export class PictureUploadService {
     return this.http.get<Images>('http://localhost:8400/media/get/' + name)
   }
 
+  executePictureUpload(username){
+    return this.http.get<Images>('http://localhost:8400/media/get/image/' + username)
+  }
+
 }

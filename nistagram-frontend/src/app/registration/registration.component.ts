@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginDataService, User } from '../service/login-data.service';
+import { LoginDataService, Profile, User } from '../service/login-data.service';
 
 @Component({
   selector: 'app-registration',
@@ -19,6 +19,8 @@ export class RegistrationComponent implements OnInit {
   role = 'user'
 
   user: User
+
+  profile: Profile
 
   constructor(
     private userService: LoginDataService,
@@ -38,6 +40,13 @@ export class RegistrationComponent implements OnInit {
           this.router.navigate(['login'])
         }
       )
+
+    this.profile = new Profile(this.username, this.firstName, this.lastName, this.email, null, null)
+    this.userService.executeUpdateProfile(this.profile).subscribe(
+      response => {
+        console.log(response)
+      }
+    )
   }
 
 }

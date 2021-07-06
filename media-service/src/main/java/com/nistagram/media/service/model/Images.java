@@ -18,27 +18,40 @@ public class Images {
 	@Lob
 	private byte[] picByte;
 	
+	private String username;
+	
 	
 	
 	public Images() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Images(byte[] picByte, String name) {
+	public Images(byte[] picByte, String name, String username) {
 		super();
 		this.picByte = picByte;
 		this.name = name;
+		this.username = username;
 	}
 	
 	
 	
 	
 	
-	public Images(Long id, String name, byte[] picByte) {
+	public Images(Long id, String name, byte[] picByte, String username) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.picByte = picByte;
+		this.username = username;
+	}
+	
+	
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getName() {
 		return name;

@@ -13,12 +13,25 @@ export class User {
   ) { }
 }
 
+export class Profile {
+  constructor(
+    public username: string,
+    public firstName: string,
+    public lastName: string,
+    public email: string,
+    public dateOfBirth: string,
+    public phone: string
+  ) { }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoginDataService {
 
   user : User
+
+  profile : Profile
 
   constructor(
     private http: HttpClient,
@@ -54,6 +67,14 @@ export class LoginDataService {
 
   loggout() {
     sessionStorage.removeItem('logUser')
+  }
+
+  executeUpdateProfile(profile){
+    return this.http.post<Profile>(`http://localhost:8900/profile/update`, profile)
+  }
+
+  executeFindUsername(username) {
+    return this.http.get<User>('http://localhost:9100/auth/user/' + username)
   }
 
 }

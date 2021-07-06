@@ -9,7 +9,7 @@ export class Profile {
     public firstName: string,
     public lastName: string,
     public email: string,
-    public dateOfBirth: string,
+    public dateOfBirth: Date,
     public phone: string
   ){}
 }
