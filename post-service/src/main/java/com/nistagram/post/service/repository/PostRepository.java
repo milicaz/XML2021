@@ -10,7 +10,5 @@ import com.nistagram.post.service.model.Post;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 	
-	Post findOneById(Long id);
-	List<Post> findAll();
 	List<Post> findByUsername(String username);
 }
