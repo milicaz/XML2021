@@ -15,6 +15,12 @@ import { FriendsComponent } from './friends/friends.component';
 import { PostComponent } from './post/post.component';
 import { StoryComponent } from './story/story.component';
 import { InfoUpdateComponent } from './info-update/info-update.component';
+import { Ng2TelInputModule } from 'ng2-tel-input';
+// import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+// const maskConfig: Partial<IConfig> = {
+//   validation: false,
+// };
 
 @NgModule({
   declarations: [
@@ -34,7 +40,9 @@ import { InfoUpdateComponent } from './info-update/info-update.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2TelInputModule
+    // NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
