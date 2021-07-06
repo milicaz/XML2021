@@ -10,30 +10,37 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "images")
+@Table(name = "post_images")
 public class ImageModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String type;
-	private String username;
 	@Lob
 	private byte[] picByte;
+	private String username;
 	
 	public ImageModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ImageModel(String name, String type, byte[] picByte) {
+	public ImageModel(String name, byte[] picByte, String username) {
 		super();
 		this.name = name;
-		this.type = type;
 		this.picByte = picByte;
+		this.username = username;
 	}
+	
 
+	public ImageModel(Long id, String name, byte[] picByte, String username) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.picByte = picByte;
+		this.username = username;
+	}
 
 	public Long getId() {
 		return id;
@@ -49,14 +56,6 @@ public class ImageModel {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getUsername() {
