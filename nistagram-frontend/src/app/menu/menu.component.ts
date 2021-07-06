@@ -1,5 +1,6 @@
 import { HttpClient, HttpEventType, HttpResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { LoginComponent } from "../login/login.component";
 import { LogoutComponent } from "../logout/logout.component";
@@ -12,7 +13,7 @@ import { LoginDataService } from "../service/login-data.service";
 })
 export class MenuComponent implements OnInit {
   // isUserLoggedIn : boolean = false
-
+  username: any;
   selectedFile: File;
   progress = 0;
   message = "";
@@ -22,7 +23,8 @@ export class MenuComponent implements OnInit {
   base64Data: any;
   
   constructor(
-    private http: HttpClient,private loginService: LoginDataService
+    private http: HttpClient,private loginService: LoginDataService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -36,17 +38,23 @@ export class MenuComponent implements OnInit {
   }
 
   upload() {
+    this.username = sessionStorage.getItem('logUser');
     this.progress = 0;
 
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.http.post('http://localhost:8400/media/upload', uploadImageData, {observe: 'response'}).subscribe((response)=>{
+    this.http.post('http://localhost:8400/media/upload/' + this.username, uploadImageData, {observe: 'response'}).subscribe((response)=>{
       if(response.status === 200){
         this.message = 'Image uploaded successfully.';
+  
+        this.router.navigate(['posts'])
       } else {
         this.message = 'Image could not be uploaded.';
       }
     });
+
+    
+
   }
 }
