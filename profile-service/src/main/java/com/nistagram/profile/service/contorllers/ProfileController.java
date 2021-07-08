@@ -51,7 +51,7 @@ public class ProfileController {
 			for(Profile p : profiles) {
 				if(p.getUsername().equals(username)){
 					Profile prof = new Profile(p.getId(), p.getUsername(), p.getFirstName(),
-							p.getLastName(), p.getEmail(), p.getDateOfBirth(), p.getPhone());
+							p.getLastName(), p.getEmail(), p.getDateOfBirth(), p.getPhone(), p.getPrivacy());
 					return new ResponseEntity<>(prof, HttpStatus.OK);
 				}else {
 					System.out.println("Ne postoji taj profil");

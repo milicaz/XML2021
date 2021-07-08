@@ -24,6 +24,7 @@ public class Profile {
 	private String email;
 	private String dateOfBirth;
 	private String phone;
+	private Boolean privacy;
 	
 	public Profile() {
 		super();
@@ -33,7 +34,7 @@ public class Profile {
 	
 
 	public Profile(Long id, String username, String firstName, String lastName, String email, String dateOfBirth,
-			String phone) {
+			String phone, Boolean privacy) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -42,6 +43,7 @@ public class Profile {
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
 		this.phone = phone;
+		this.privacy = privacy;
 	}
 
 
@@ -110,6 +112,18 @@ public class Profile {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+
+
+	public Boolean getPrivacy() {
+		return privacy;
+	}
+
+
+
+	public void setPrivacy(Boolean privacy) {
+		this.privacy = privacy;
 	}
 	
 	

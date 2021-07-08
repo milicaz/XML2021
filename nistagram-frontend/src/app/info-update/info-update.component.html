@@ -72,6 +72,11 @@
       <input type="text" [(ngModel)] = "phone" class="form-control" name="password" required="required">
     </fieldset><br>
 
+    <fieldset class="form-group" class="col-md-6">
+      <input type="checkbox" [(ngModel)] = "privacy" name="privacy" id="privacy">
+      <label class="checkbox-inline" for="privacy">&nbsp;Private</label>
+    </fieldset>
+
     <button class="btn btn-success" (click)=update()>Update</button>
 
   </form>

@@ -17,6 +17,7 @@ export class InfoUpdateComponent implements OnInit {
   email: any
   dateOfBirth: any
   phone: any
+  privacy: any
 
   constructor(
     private router: Router,
@@ -35,14 +36,15 @@ export class InfoUpdateComponent implements OnInit {
           this.lastName = response.lastName,
           this.email = response.email,
           this.dateOfBirth = response.dateOfBirth,
-          this.phone = response.phone
+          this.phone = response.phone,
+          this.privacy = response.privacy
       }
     )
   }
 
   update() {
     this.profile = new Profile(this.id, this.username, this.firstName, this.lastName, this.email,
-      this.dateOfBirth, this.phone)
+      this.dateOfBirth, this.phone, this.privacy)
     // sessionStorage.setItem('logUser', this.username)
     console.log("Profile je: " + this.profile)
     // this.profile = new Profile(this.username, this.firstName, this.lastName, this.email,

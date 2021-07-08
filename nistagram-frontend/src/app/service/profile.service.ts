@@ -10,7 +10,8 @@ export class Profile {
     public lastName: string,
     public email: string,
     public dateOfBirth: Date,
-    public phone: string
+    public phone: string,
+    public privacy: boolean
   ){}
 }
 
