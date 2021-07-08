@@ -15,6 +15,18 @@ export class Profile {
   ){}
 }
 
+export class User {
+  constructor(
+    public id: number,
+    public username: string,
+    public password: string,
+    public firstName: string,
+    public lastName: string,
+    public email: string,
+    public role: string
+  ) { }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,6 +43,10 @@ export class ProfileService {
 
   executeUpdateProfile(username, profile) {
     return this.http.put<Profile>('http://localhost:8900/profile/update/profile/' + username, profile)
+  }
+
+  executeUserUpdate(username, user) {
+    return this.http.put<User>('http://localhost:9100/auth/update/user/' + username, user)
   }
 
 }

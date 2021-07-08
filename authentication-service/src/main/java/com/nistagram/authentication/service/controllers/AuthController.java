@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,6 +78,11 @@ public class AuthController {
 		return Status.SUCCESS;
 	}
 	
+	@PutMapping(path = "update/user/{username}", consumes = "application/json")
+	public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User user){
+		User userUpdate = urepo.save(user);
+		return new ResponseEntity<>(userUpdate, HttpStatus.OK);
+	}
 	
 	
 
