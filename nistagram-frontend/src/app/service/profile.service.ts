@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export class Profile {
   constructor(
@@ -13,6 +13,21 @@ export class Profile {
     public phone: string,
     public privacy: boolean
   ){}
+}
+
+export class ProfileModel {
+  public id: number;
+  public username: string;
+  public firstName: string;
+  public lastName: string;
+  public email: string;
+  public dateOfBirth: Date;
+  public phone: string;
+  public privacy: boolean;
+  public picByte: string;
+  public retrievedImage: string;
+
+  constructor(){}
 }
 
 export class User {
@@ -34,7 +49,8 @@ export class ProfileService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   executeProfileService(username) {
@@ -47,6 +63,18 @@ export class ProfileService {
 
   executeUserUpdate(username, user) {
     return this.http.put<User>('http://localhost:9100/auth/update/user/' + username, user)
+  }
+
+  executeGetProfiles() {
+    return this.http.get<ProfileModel[]>('http://localhost:8900/profile/model/get/profiles')
+  }
+
+  executeGetProfile(username) {
+    return this.http.get<ProfileModel>('http://localhost:8900/profile/model/get/profile/' + username)
+  }
+
+  executeUpdateProfileModel(username, profile) {
+    return this.http.put<ProfileModel>('http://localhost:8900/profile/model/update/' + username, profile)
   }
 
 }
