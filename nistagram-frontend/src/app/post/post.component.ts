@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PictureUploadService } from "../service/picture-upload.service";
 import { Post, PostService } from "../service/post.service";
+import { ProfileService } from "../service/profile.service";
 
 @Component({
   selector: "app-post",
@@ -16,27 +17,24 @@ export class PostComponent implements OnInit {
   action: string;
 
   username: any;
-
   base64Data: any;
   retrievedImage: any;
 
   constructor(
     private postService: PostService,
     private pictureUpload: PictureUploadService,
+    private profileService: ProfileService,
     private datepipe: DatePipe,
     private activedRoute: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // this.username = sessionStorage.getItem("logUser");
-    // this.retrievePosts();
-    // this.pictureUpload.executePictureUpload(this.username).subscribe((data) => {
-    //   console.log(data);
-    //   this.base64Data = data.picByte;
-    //   this.retrievedImage = "data:image/jpeg;base64," + this.base64Data;
-    //   console.log("Image " + this.retrievedImage);
-    // });
+    this.username = sessionStorage.getItem("logUser");
+    this.profileService.executeGetProfile(this.username).subscribe((data) => {
+      this.base64Data = data.picByte;
+      this.retrievedImage = "data:image/jpeg;base64," + this.base64Data;
+    });
     this.refreshData();
   }
 

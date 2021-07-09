@@ -1,6 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { ProfileService } from "../service/profile.service";
 import { Story, StoryService } from "../service/story.service";
 
 @Component({
@@ -14,14 +15,24 @@ export class StoryComponent implements OnInit {
   selectedStory: Story;
   action: string;
 
+  username: any;
+  base64Data: any;
+  retrievedImage: any;
+
   constructor(
     private storyService: StoryService,
+    private profileService: ProfileService,
     private datepipe: DatePipe,
     private activedRoute: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.username = sessionStorage.getItem("logUser");
+    this.profileService.executeGetProfile(this.username).subscribe((data)=>{
+      this.base64Data = data.picByte;
+      this.retrievedImage = "data:image/jpeg;base64," + this.base64Data;
+    });
     this.refreshData();
   }
 

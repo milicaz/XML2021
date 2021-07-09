@@ -20,9 +20,9 @@
                   <button class="btn p-0 m-0" (click)="viewStory(story.id)">
                     <div class="d-flex flex-column align-items-center">
                       <div
-                        class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border border-danger story-profile-photo">
-                        <img src="assets/images/deafault.png" alt="..."
-                          style="transform: scale(1.5); width: 100%; position: absolute; left: 0;">
+                        class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center story-profile-photo">
+                        <img [src]="retrievedImage" alt="..."
+                          style="transform: scale(1.5); width: 80%; position: absolute; left: 0;">
                       </div>
                       <small>{{story.username}}</small>
                     </div>
