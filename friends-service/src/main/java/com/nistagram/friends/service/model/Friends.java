@@ -1,6 +1,4 @@
-package com.nistagram.profile.service.model;
-
-import java.util.Date;
+package com.nistagram.friends.service.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "profile_models")
-public class ProfileModel {
+@Table(name = "friends")
+public class Friends {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,28 +21,14 @@ public class ProfileModel {
 	private String email;
 	private String dateOfBirth;
 	private String phone;
-	private Boolean privacy;
+	private String privacy;
 	
 	@Column(name = "picByte", length = 300000)
 	private byte[] picByte;
 	
-	
+	private String friendUname;
 
-	public ProfileModel(Long id, String username, String firstName, String lastName, String email, String dateOfBirth,
-			String phone, Boolean privacy, byte[] picByte) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.dateOfBirth = dateOfBirth;
-		this.phone = phone;
-		this.privacy = privacy;
-		this.picByte = picByte;
-	}
-
-	public ProfileModel() {
+	public Friends() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -105,11 +89,11 @@ public class ProfileModel {
 		this.phone = phone;
 	}
 
-	public Boolean getPrivacy() {
+	public String getPrivacy() {
 		return privacy;
 	}
 
-	public void setPrivacy(Boolean privacy) {
+	public void setPrivacy(String privacy) {
 		this.privacy = privacy;
 	}
 
@@ -119,6 +103,14 @@ public class ProfileModel {
 
 	public void setPicByte(byte[] picByte) {
 		this.picByte = picByte;
+	}
+
+	public String getFriendUname() {
+		return friendUname;
+	}
+
+	public void setFriendUname(String friendUname) {
+		this.friendUname = friendUname;
 	}
 	
 	

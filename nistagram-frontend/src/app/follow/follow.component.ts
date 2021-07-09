@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Friends, FriendsService } from '../service/friends.service';
 import { ProfileModel, ProfileService } from '../service/profile.service';
 
 @Component({
@@ -16,11 +17,17 @@ export class FollowComponent implements OnInit {
 
   image : any
   u : any
-  log : any
+  log = true
   username : any
 
+
+  firend : Friends
+
   constructor(
-    private profileService : ProfileService
+    private http : HttpClient,
+    private profileService : ProfileService,
+    private router : Router,
+    private friendService : FriendsService
   ) { }
 
   ngOnInit() {
@@ -40,6 +47,31 @@ export class FollowComponent implements OnInit {
           }
       }
     )
+  }
+
+  addFriend(id : number){
+    console.log("Zapracivanje prijatelja")
+    // console.log("First name je: " + this.p.firstName)
+
+    // this.firend = new Friends(id)
+    // this.friendService.executePostFriends(this.firend).subscribe(
+    //   data => {
+    //     console.log("data je :" + data)
+    //   }
+    // )
+
+    this.profileService.executeGetOneProfile(id).subscribe(
+      data => {
+        this.log = false
+        this.firend = new Friends(id, data.username, data.firstName, data.lastName, data.email, data.dateOfBirth, data.phone, data.privacy, data.picByte, this.username)
+        this.friendService.executePostFriends(this.firend).subscribe(
+          response => {
+            console.log("response je : " + response)
+          }
+        )
+      }
+    )
+    
   }
 
 

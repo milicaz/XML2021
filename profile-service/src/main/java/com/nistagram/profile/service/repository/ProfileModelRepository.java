@@ -9,5 +9,6 @@ import com.nistagram.profile.service.model.ProfileModel;
 public interface ProfileModelRepository extends JpaRepository<ProfileModel, Long> {
 	
 	Collection<ProfileModel> findByUsername(String username);
+	Collection<ProfileModel> findOneById(Long id);
 
 }

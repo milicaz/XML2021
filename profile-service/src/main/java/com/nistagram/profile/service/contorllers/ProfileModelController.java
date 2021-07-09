@@ -104,6 +104,24 @@ public class ProfileModelController {
 		
 	}
 	
+	@GetMapping(path = "/get/by/{id}")
+	public ResponseEntity<ProfileModel> getProfileById(@PathVariable("id") Long id){
+		try {
+			Collection<ProfileModel> profiles = pmrepo.findOneById(id);
+			for(ProfileModel p : profiles) {
+				if(p.getId().equals(id)) {
+					return new ResponseEntity<>(p, HttpStatus.OK);
+				}else {
+					System.out.println("Profil ne postoji.");
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
 	
 
 }

@@ -81,4 +81,8 @@ export class ProfileService {
     return this.http.get<User>('http://localhost:9100/auth/user/' + username)
   }
 
+  executeGetOneProfile(id) {
+    return this.http.get<ProfileModel>('http://localhost:8900/profile/model/get/by/' + id)
+  }
+
 }
