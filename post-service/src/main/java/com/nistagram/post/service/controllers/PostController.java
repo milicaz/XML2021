@@ -1,5 +1,6 @@
 package com.nistagram.post.service.controllers;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nistagram.post.service.model.Post;
 import com.nistagram.post.service.repository.PostRepository;
@@ -23,6 +26,8 @@ import com.nistagram.post.service.repository.PostRepository;
 @RestController
 @RequestMapping("/post")
 public class PostController {
+	
+	private byte[] bytes;
 
 	@Autowired
 	PostRepository postRepostitory;
@@ -62,10 +67,16 @@ public class PostController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@PostMapping("/upload")
+	public void uploadImage(@RequestParam("image") MultipartFile file) throws IOException{
+		this.bytes = file.getBytes();
+	}
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createPost(@RequestBody Post post) {
 		try {
+			post.setPicByte(this.bytes);
 			Post _post = postRepostitory.save(post);
 			return new ResponseEntity<>(_post, HttpStatus.CREATED);
 		} catch (Exception e) {

@@ -1,7 +1,9 @@
 package com.nistagram.post.service.model;
 
-import java.time.Instant;
+import java.util.Arrays;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +12,6 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "posts")
@@ -23,16 +23,13 @@ public class Post {
 	@CreatedBy
 	private String username;
 	@CreatedDate
-	private Instant createdAt;
-	private String urlMedia;
+	private Date createdAt;
 	private String caption;
-	@LastModifiedBy
-	private String lastModifiedBy;
-	@LastModifiedDate
-	private Instant updatedAt;
 	private int totalLikes;
 	private int totalDislikes;
 	private Boolean favorite;
+	@Column(name = "picByte", length = 1000)
+	private byte[] picByte;
 
 	public Post() {
 	}
@@ -53,20 +50,12 @@ public class Post {
 		this.username = username;
 	}
 
-	public Instant getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Instant createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public String getUrlMedia() {
-		return urlMedia;
-	}
-
-	public void setUrlMedia(String urlMedia) {
-		this.urlMedia = urlMedia;
 	}
 
 	public String getCaption() {
@@ -75,22 +64,6 @@ public class Post {
 
 	public void setCaption(String caption) {
 		this.caption = caption;
-	}
-
-	public String getLastModifiedBy() {
-		return lastModifiedBy;
-	}
-
-	public void setLastModifiedBy(String lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
-	}
-
-	public Instant getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Instant updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 	public int getTotalLikes() {
@@ -117,11 +90,19 @@ public class Post {
 		this.favorite = favorite;
 	}
 
+	public byte[] getPicByte() {
+		return picByte;
+	}
+
+	public void setPicByte(byte[] picByte) {
+		this.picByte = picByte;
+	}
+
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", username=" + username + ", createdAt=" + createdAt + ", urlMedia=" + urlMedia
-				+ ", caption=" + caption + ", lastModifiedBy=" + lastModifiedBy + ", updatedAt=" + updatedAt
-				+ ", totalLikes=" + totalLikes + ", totalDislikes=" + totalDislikes + ", favorite=" + favorite + "]";
+		return "Post [id=" + id + ", username=" + username + ", createdAt=" + createdAt + ", caption=" + caption
+				+ ", totalLikes=" + totalLikes + ", totalDislikes=" + totalDislikes + ", favorite=" + favorite
+				+ ", picByte=" + Arrays.toString(picByte) + "]";
 	}
 
 }
