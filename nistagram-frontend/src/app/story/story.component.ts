@@ -14,6 +14,8 @@ export class StoryComponent implements OnInit {
   selectedStory: Story;
   action: string;
 
+  username: any;
+
   constructor(
     private storyService: StoryService,
     private datepipe: DatePipe,
@@ -26,6 +28,8 @@ export class StoryComponent implements OnInit {
   }
 
   refreshData() {
+    this.username = sessionStorage.getItem("logUser");
+    console.log("Username je: " + this.username)
     this.storyService
       .getAllStories()
       .subscribe((response) => this.handleSuccessfulResponse(response));
@@ -49,6 +53,7 @@ export class StoryComponent implements OnInit {
     this.stories = new Array<Story>();
     //get stories returned by the api call
     this.storiesRecieved = response;
+    console.log("Response je: " + this.storiesRecieved);
     for (const story of this.storiesRecieved) {
       const storyWithRetrievedImageField = new Story();
       storyWithRetrievedImageField.id = story.id;
@@ -62,16 +67,15 @@ export class StoryComponent implements OnInit {
     }
   }
 
-  createStory(){
+  createStory() {
     this.selectedStory = new Story();
     this.selectedStory.username = sessionStorage.getItem("logUser");
     var datum = Date.now();
     this.selectedStory.createdAt = this.datepipe.transform(datum, "yyyy-MM-dd");
-    this.router.navigate(['stories'], {queryParams: {action: "add"}});
+    this.router.navigate(["stories"], { queryParams: { action: "add" } });
   }
 
-  viewStory(id: number){
-    this.router.navigate(['stories'], {queryParams: {id, action: "view"}});
+  viewStory(id: number) {
+    this.router.navigate(["stories"], { queryParams: { id, action: "view" } });
   }
-
 }

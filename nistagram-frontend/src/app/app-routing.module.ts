@@ -9,6 +9,7 @@ import { PostComponent } from "./post/post.component";
 import { ProfileModelComponent } from "./profile-model/profile-model.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { RegistrationComponent } from "./registration/registration.component";
+import { StoryComponent } from "./story/story.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: "retrievedImage", component: ProfileComponent},
   { path: "update", component: InfoUpdateComponent},
   { path: "follow", component: FollowComponent},
-  { path: "profiles", component: ProfileModelComponent}
+  { path: "profiles", component: ProfileModelComponent},
+  { path: "stories", component: StoryComponent}
 ];
 
 @NgModule({

@@ -56,7 +56,7 @@ public class PostController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
 	@GetMapping("/get/{postId}")
 	public ResponseEntity<?> getPost(@PathVariable("postId") Long postId) {
 		Optional<Post> postData = postRepostitory.findById(postId);

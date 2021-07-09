@@ -36,6 +36,8 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
 import { FollowComponent } from './follow/follow.component';
 import { ProfileModelComponent } from './profile-model/profile-model.component';
 import { AddProfilePictureComponent } from './add-profile-picture/add-profile-picture.component';
+import { StoryCreateComponent } from './story-create/story-create.component';
+import { StoryViewComponent } from './story-view/story-view.component';
 // import { IConfig, NgxMaskModule } from 'ngx-mask';
 
 // const maskConfig: Partial<IConfig> = {
@@ -58,7 +60,9 @@ import { AddProfilePictureComponent } from './add-profile-picture/add-profile-pi
     PostCreateComponent,
     FollowComponent,
     ProfileModelComponent,
-    AddProfilePictureComponent
+    AddProfilePictureComponent,
+    StoryCreateComponent,
+    StoryViewComponent
   ],
   imports: [
     BrowserModule,

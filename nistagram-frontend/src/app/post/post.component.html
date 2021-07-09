@@ -1,5 +1,3 @@
-<app-story></app-story>
-
 <a class="btn btn-primary mb-3" (click)="createPost()">Create new post</a>
 <div class="col-md-12">
     <app-post-create *ngIf="action === 'add'" [post]="selectedPost" (postAddedEvent)="refreshData()">
