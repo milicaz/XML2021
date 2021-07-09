@@ -1,0 +1,61 @@
+<div class="container row">
+  <div class="col-md-6">
+    <h1>Profile</h1>
+    <a class="btn btn-primary mb-3" (click)="updateProfile()">Update Profile</a>
+    <br>
+    <div *ngIf=retrievedImage>
+      <img [src]="retrievedImage" alt="Slika nije nadjena" width=40% height=80%>
+    </div>
+    <!-- <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+          <th>Date Of birth</th>
+          <th>Phone</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{id}}</td>
+          <td>{{username}}</td>
+          <td>{{firstName}}</td>
+          <td>{{lastName}}</td>
+          <td>{{email}}</td>
+          <td>{{dateOfBirth}}</td>
+          <td>{{phone}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="setBook(book.id)">Show Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+  <label for="username">Username</label>
+  <input type="text" class="form-control" id="username" placeholder="Profile username" [(ngModel)]="username" name="username" readonly>
+
+  <label for="firstName">First name</label>
+  <input type="text" class="form-control" id="firstName" placeholder="First name" name="firstName" [(ngModel)]="firstName" readonly>
+
+  <label for="lastName">Last name</label>
+  <input type="text" class="form-control" id="lastName" placeholder="Last name" name="lastName" [(ngModel)]="lastName" readonly>
+  
+  <label for="email">Email</label>
+  <input type="text" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="email" readonly>
+
+  <label for="dateOfBirth">Date of birth</label>
+  <input type="date" class="form-control" id="dateOfBirth" placeholder="Date of birth" name="dateOfBirth" [(ngModel)]="dateOfBirth" readonly>
+
+  <label for="phone">Phone number</label>
+  <input type="text" class="form-control" id="phone" placeholder="Phone number" name="phone" [(ngModel)]="phone" readonly>
+
+    <br>
+  <button type="button" class="btn btn-primary" (click)="setBook(book.id)">Show Details</button>
+  </div>
+  <div class="col-md-6">
+    <app-add-profile-picture *ngIf="action === 'update'" [profile]="selectedProfile" (postAddedEvent)="refreshData()"></app-add-profile-picture>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<h1>Update Profile</h1>
+<div class="container row">
+<form>
+  <label for="username">Username</label>
+  <input type="text" class="form-control" id="username" placeholder="Profile username" name="username" [(ngModel)]="profile.username">
+
+  <label for="firstName">First name</label>
+  <input type="text" class="form-control" id="firstName" placeholder="First name" name="firstName" [(ngModel)]="profile.firstName">
+
+  <label for="lastName">Last name</label>
+  <input type="text" class="form-control" id="lastName" placeholder="Last name" name="lastName" [(ngModel)]="profile.lastName">
+
+  <label for="email">Email</label>
+  <input type="text" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="profile.email">
+
+  <label for="dateOfBirth">Date of birth</label>
+  <input type="date" class="form-control" id="dateOfBirth" placeholder="Date of birth" name="dateOfBirth" 
+  [ngModel]="profile.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="profile.dateOfBirth = $event" name="dateOfBirth">
+
+  <label for="phone">Phone number</label>
+  <input type="text" class="form-control" id="phone" placeholder="Phone number" name="phone" [(ngModel)]="profile.phone">
+  <br>
+  <input type="checkbox" [(ngModel)]="profile.privacy" name="privacy" id="privacy">
+  <label class="checkbox-inline" for="privacy">&nbsp;Private</label>
+  <br>
+  <br>
+  <input type="file" (change)="onFileChanged($event)">
+  <img [src]="imgURL" height="200" width="200" *ngIf="imgURL">
+  <br>
+  <br>
+  <button type="button" class="btn btn-success" (click)="saveProfile()">Save</button>
+</form>
+</div>
