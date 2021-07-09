@@ -25,7 +25,7 @@ export class PostComponent implements OnInit {
     private pictureUpload: PictureUploadService,
     private datepipe: DatePipe,
     private activedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -85,7 +85,7 @@ export class PostComponent implements OnInit {
   likeUp($event, id) {
     console.log("Like button is clicked");
     console.log("ID je: " + id);
-    this.postService.getPost(id).subscribe(data =>{
+    this.postService.getPost(id).subscribe((data) => {
       console.log("Data je: " + data);
       data.totalLikes += 1;
     });
@@ -94,7 +94,7 @@ export class PostComponent implements OnInit {
   dislikeUp($event, id) {
     console.log("Dislike button is clicked");
     console.log("ID je: " + id);
-    this.postService.getPost(id).subscribe(data =>{
+    this.postService.getPost(id).subscribe((data) => {
       console.log("Data je: " + data);
       var p = new Post();
       p.username = data.username;
@@ -107,7 +107,7 @@ export class PostComponent implements OnInit {
       p.favorite = data.favorite;
 
       console.log("p:" + p);
-      this.postService.update(id,p).subscribe(update =>{
+      this.postService.update(id, p).subscribe((update) => {
         console.log("Update je: " + update);
       });
     });
@@ -115,8 +115,10 @@ export class PostComponent implements OnInit {
 
   refreshData() {
     this.postService
-      .getAllPosts()
-      .subscribe((response) => this.handleSuccessfulResponse(response));
+      .getAllByUsername(sessionStorage.getItem("logUser"))
+      .subscribe((response) => {
+        this.handleSuccessfulResponse(response);
+      });
     this.activedRoute.queryParams.subscribe((params) => {
       // get the url parameter named action. this can either be add or view.
       this.action = params["action"];

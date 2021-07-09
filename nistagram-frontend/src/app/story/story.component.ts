@@ -14,8 +14,6 @@ export class StoryComponent implements OnInit {
   selectedStory: Story;
   action: string;
 
-  username: any;
-
   constructor(
     private storyService: StoryService,
     private datepipe: DatePipe,
@@ -27,33 +25,10 @@ export class StoryComponent implements OnInit {
     this.refreshData();
   }
 
-  refreshData() {
-    this.username = sessionStorage.getItem("logUser");
-    console.log("Username je: " + this.username)
-    this.storyService
-      .getAllStories()
-      .subscribe((response) => this.handleSuccessfulResponse(response));
-    this.activedRoute.queryParams.subscribe((params) => {
-      // get the url parameter named action. this can either be add or view.
-      this.action = params["action"];
-      // get the parameter id. this will be the id of the post whose details
-      // are to be displayed when action is view.
-      const id = params["id"];
-      // if id exists, convert it to integer and then retrive the post from
-      // the post array
-      if (id) {
-        this.selectedStory = this.stories.find((story) => {
-          return story.id === +id;
-        });
-      }
-    });
-  }
-
   handleSuccessfulResponse(response) {
     this.stories = new Array<Story>();
     //get stories returned by the api call
     this.storiesRecieved = response;
-    console.log("Response je: " + this.storiesRecieved);
     for (const story of this.storiesRecieved) {
       const storyWithRetrievedImageField = new Story();
       storyWithRetrievedImageField.id = story.id;
@@ -78,4 +53,27 @@ export class StoryComponent implements OnInit {
   viewStory(id: number) {
     this.router.navigate(["stories"], { queryParams: { id, action: "view" } });
   }
+
+  refreshData() {
+    this.storyService
+      .getAllByUsername(sessionStorage.getItem('logUser'))
+      .subscribe((response) => {
+        console.log("Refresh:" + response);
+        this.handleSuccessfulResponse(response);
+      });
+    this.activedRoute.queryParams.subscribe((params) => {
+      // get the url parameter named action. this can either be add or view.
+      this.action = params["action"];
+      // get the parameter id. this will be the id of the post whose details
+      // are to be displayed when action is view.
+      const id = params["id"];
+      // if id exists, convert it to integer and then retrive the post from
+      // the post array
+      if (id) {
+        this.selectedStory = this.stories.find((story) => {
+          return story.id === +id;
+        });
+      }
+    });
+  }  
 }
