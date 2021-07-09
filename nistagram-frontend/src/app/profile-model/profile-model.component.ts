@@ -83,7 +83,7 @@ export class ProfileModelComponent implements OnInit {
         this.email = data.email
         this.dateOfBirth = data.dateOfBirth
         this.phone = data.phone
-      }
+      })
   }
 
 }

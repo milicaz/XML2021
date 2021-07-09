@@ -13,17 +13,9 @@ import { LoginDataService } from "../service/login-data.service";
 })
 export class MenuComponent implements OnInit {
   // isUserLoggedIn : boolean = false
-  username: any;
-  selectedFile: File;
-  progress = 0;
-  message = "";
-  imageName: any;
-  retrievedImage: any;
-  retrieveResponse: any;
-  base64Data: any;
-  
+    
   constructor(
-    private http: HttpClient,private loginService: LoginDataService,
+    private http: HttpClient, private loginService: LoginDataService,
     private router: Router
   ) {}
 
@@ -33,28 +25,4 @@ export class MenuComponent implements OnInit {
     //console.log("User je: " + this.isUserLoggedIn)
   }
 
-  selectFile(event) {
-    this.selectedFile = event.target.files[0];
-  }
-
-  upload() {
-    this.username = sessionStorage.getItem('logUser');
-    this.progress = 0;
-
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-
-    this.http.post('http://localhost:8400/media/upload/' + this.username, uploadImageData, {observe: 'response'}).subscribe((response)=>{
-      if(response.status === 200){
-        this.message = 'Image uploaded successfully.';
-  
-        this.router.navigate(['posts'])
-      } else {
-        this.message = 'Image could not be uploaded.';
-      }
-    });
-
-    
-
-  }
 }

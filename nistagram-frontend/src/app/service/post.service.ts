@@ -3,20 +3,24 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 export class Post {
-  constructor(
-    public username: string,
-    public urlMedia: string,
-    public caption: string,
-    public totalLikes: number = 0,
-    public totalDislikes: number = 0,
-    public favorite: false
-  ) {}
+  id: number;
+  username: string;
+  createdAt: any;
+  caption: string;
+  totalLikes: number = 0;
+  totalDislikes: number = 0;
+  favorite: false;
+  picByte: string;
+  retrievedImage: string;
+  constructor() {}
 }
 
 @Injectable({
   providedIn: "root",
 })
 export class PostService {
+  post: Post;
+
   constructor(private http: HttpClient) {}
 
   getAllPosts(): Observable<Post[]> {
@@ -33,20 +37,19 @@ export class PostService {
     );
   }
 
-  create(data) {
-    return this.http.post(`http://localhost:9000/post/create`, data);
+  create(post: Post) {
+    return this.http.post('http://localhost:9000/post/create', post);
   }
 
-  update(id, data) {
-    return this.http.put(`http://localhost:9000/post/update/${id}`, data);
+  update(id, post) {
+    return this.http.put(`http://localhost:9000/post/update/${id}`, post);
   }
 
-  delete(id){
+  delete(id) {
     return this.http.delete(`http://localhost:9000/post/delete/${id}`);
   }
 
-  deleteAll(){
+  deleteAll() {
     return this.http.delete(`http://localhost:9000/post/all`);
   }
-
 }

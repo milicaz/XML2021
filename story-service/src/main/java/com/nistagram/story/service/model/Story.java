@@ -1,4 +1,4 @@
-package com.nistagram.post.service.model;
+package com.nistagram.story.service.model;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -14,8 +14,8 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "stories")
+public class Story {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +24,10 @@ public class Post {
 	private String username;
 	@CreatedDate
 	private Date createdAt;
-	private String caption;
-	private int totalLikes;
-	private int totalDislikes;
-	private Boolean favorite;
 	@Column(name = "picByte", length = 1000)
 	private byte[] picByte;
 
-	public Post() {
+	public Story() {
 	}
 
 	public Long getId() {
@@ -58,38 +54,6 @@ public class Post {
 		this.createdAt = createdAt;
 	}
 
-	public String getCaption() {
-		return caption;
-	}
-
-	public void setCaption(String caption) {
-		this.caption = caption;
-	}
-
-	public int getTotalLikes() {
-		return totalLikes;
-	}
-
-	public void setTotalLikes(int totalLikes) {
-		this.totalLikes = totalLikes;
-	}
-
-	public int getTotalDislikes() {
-		return totalDislikes;
-	}
-
-	public void setTotalDislikes(int totalDislikes) {
-		this.totalDislikes = totalDislikes;
-	}
-
-	public Boolean getFavorite() {
-		return favorite;
-	}
-
-	public void setFavorite(Boolean favorite) {
-		this.favorite = favorite;
-	}
-
 	public byte[] getPicByte() {
 		return picByte;
 	}
@@ -100,9 +64,8 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", username=" + username + ", createdAt=" + createdAt + ", caption=" + caption
-				+ ", totalLikes=" + totalLikes + ", totalDislikes=" + totalDislikes + ", favorite=" + favorite
-				+ ", picByte=" + Arrays.toString(picByte) + "]";
+		return "Story [id=" + id + ", username=" + username + ", createdAt=" + createdAt + ", picByte="
+				+ Arrays.toString(picByte) + "]";
 	}
 
 }
