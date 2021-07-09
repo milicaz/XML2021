@@ -52,6 +52,7 @@ export class PostCreateComponent implements OnInit {
             this.router.navigate(["posts"]);
           });
           console.log("Image uploaded successfully");
+          console.log("Proba");
         } else {
           console.log("Image not uploaded successfully");
         }
