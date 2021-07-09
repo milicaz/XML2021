@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProfileModel } from './profile.service';
 
 export class User {
   constructor(
@@ -31,7 +32,7 @@ export class LoginDataService {
 
   user : User
 
-  profile : Profile
+  profile : ProfileModel
 
   constructor(
     private http: HttpClient,
@@ -69,12 +70,16 @@ export class LoginDataService {
     sessionStorage.removeItem('logUser')
   }
 
-  executeUpdateProfile(profile){
-    return this.http.post<Profile>(`http://localhost:8900/profile/update`, profile)
-  }
+  // executeUpdateProfile(profile){
+  //   return this.http.post<Profile>(`http://localhost:8900/profile/update`, profile)
+  // }
 
   executeFindUsername(username) {
     return this.http.get<User>('http://localhost:9100/auth/user/' + username)
+  }
+
+  executeAddProfile(profile) {
+    return this.http.post<Profile>('http://localhost:8900/profile/model/add', profile)
   }
 
 }

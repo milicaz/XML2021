@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileModel, ProfileService } from '../service/profile.service';
+import { LoginDataService } from '../service/login-data.service';
+import { ProfileModel, ProfileService, User } from '../service/profile.service';
 
 @Component({
   selector: 'app-add-profile-picture',
@@ -17,6 +18,10 @@ export class AddProfilePictureComponent implements OnInit {
   postAddedEvent = new EventEmitter();
 
   username : any
+  password: any
+  role: any
+  user : User
+  id: any
 
   private selectedFile;
   imgURL: any;
@@ -24,7 +29,8 @@ export class AddProfilePictureComponent implements OnInit {
   constructor(
     private profileService : ProfileService,
     private router : Router,
-    private http : HttpClient
+    private http : HttpClient,
+    private loginService : LoginDataService
   ) { }
 
   ngOnInit() {
@@ -33,8 +39,11 @@ export class AddProfilePictureComponent implements OnInit {
     this.profileService.executeGetProfile(this.username).subscribe(
       data => {
         this.profile = data
+        this.username = this.profile.username
+        console.log("This.username je u metodi: " + this.username)
         console.log("Privacy je : " + this.profile.privacy)
         console.log("Username je : " + this.profile.username)
+
       }
     )
   }
@@ -57,9 +66,13 @@ export class AddProfilePictureComponent implements OnInit {
     uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
     this.selectedFile.imageName = this.selectedFile.name;
 
+    // console.log("This.username je u metodi save: " + this.username)
+
     this.http.post('http://localhost:8900/profile/model/upload', uploadData, { observe: 'response' })
       .subscribe((response) => {
         if (response.status === 200) {
+          // console.log("this.profile.username je " + this.profile.username)
+          // sessionStorage.setItem('logUser', this.profile.username)
           this.profileService.executeUpdateProfileModel(this.username, this.profile).subscribe(
             (profile) => {
               this.postAddedEvent.emit();
@@ -71,7 +84,26 @@ export class AddProfilePictureComponent implements OnInit {
           console.log('Image not uploaded successfully');
         }
       }
-      );
+      )
+
+      this.profileService.executeFindUsername(this.username).subscribe(
+        data => {
+          this.id = data.id
+          this.password = data.password
+          this.role = data.role
+          this.user = new User(this.id, this.username, this.password, this.profile.firstName, this.profile.lastName, this.profile.email, this.role)
+          this.profileService.executeUserUpdate(this.username, this.user).subscribe(
+            d => {
+              console.log("D je: " + d)
+            }
+          )
+
+        }
+      )
+
+      // sessionStorage.setItem('logUser', this.profile.username)
+      // console.log("this.username je: " + this.username)
+      // this.ngOnInit()
 
     // console.log("Profil je : " + this.profile.email)
     // this.profileService.executeUpdateProfileModel(this.username, this.profile).subscribe()
