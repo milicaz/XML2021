@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.CompletionContext.Status;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,8 +50,8 @@ public class ProfileModelController {
 	
 	public ResponseEntity<ProfileModel> getProfile(@PathVariable("username") String username){
 		try {
-			int secondsToSleep = 1;
-			Thread.sleep(secondsToSleep * 60);
+//			int secondsToSleep = 1;
+//			Thread.sleep(secondsToSleep * 120);
 			Collection<ProfileModel> profiles = pmrepo.findByUsername(username);
 			for(ProfileModel p : profiles) {
 				if(p.getUsername().equals(username)){
@@ -85,10 +88,20 @@ public class ProfileModelController {
 
 	//Umesto PostMapping("/add")
 	@PutMapping("/update/{username}")
-	public void updateProfile(@PathVariable String username, @RequestBody ProfileModel profile) throws IOException {
+	public void updateProfile(@PathVariable String username, @RequestBody ProfileModel profile) throws IOException, InterruptedException {
+		int secondsToSleep = 1;
+		Thread.sleep(secondsToSleep * 120);
 		profile.setPicByte(this.bytes);
 		pmrepo.save(profile);
 		this.bytes = null;
+	}
+	
+	@PostMapping(path = "/add", consumes = "application/json" )
+	public Status updateProfile(@Valid @RequestBody ProfileModel profile) {
+		
+		pmrepo.save(profile);
+		return Status.SUCCESS;
+		
 	}
 	
 	

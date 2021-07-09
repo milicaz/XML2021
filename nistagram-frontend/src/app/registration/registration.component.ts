@@ -43,7 +43,7 @@ export class RegistrationComponent implements OnInit {
       )
 
     this.profile = new Profile(this.username, this.firstName, this.lastName, this.email, null, null)
-    this.userService.executeUpdateProfile(this.profile).subscribe(
+    this.userService.executeAddProfile(this.profile).subscribe(
       response => {
         console.log(response)
       }

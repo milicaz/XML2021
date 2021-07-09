@@ -81,7 +81,7 @@ public class AuthController {
 	@PutMapping(path = "update/user/{username}", consumes = "application/json")
 	public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User user){
 		User userUpdate = urepo.save(user);
-		return new ResponseEntity<>(userUpdate, HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	
