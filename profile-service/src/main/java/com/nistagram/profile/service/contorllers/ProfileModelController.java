@@ -89,8 +89,6 @@ public class ProfileModelController {
 	//Umesto PostMapping("/add")
 	@PutMapping("/update/{username}")
 	public void updateProfile(@PathVariable String username, @RequestBody ProfileModel profile) throws IOException, InterruptedException {
-		int secondsToSleep = 1;
-		Thread.sleep(secondsToSleep * 120);
 		profile.setPicByte(this.bytes);
 		pmrepo.save(profile);
 		this.bytes = null;
@@ -98,7 +96,6 @@ public class ProfileModelController {
 	
 	@PostMapping(path = "/add", consumes = "application/json" )
 	public Status updateProfile(@Valid @RequestBody ProfileModel profile) {
-		
 		pmrepo.save(profile);
 		return Status.SUCCESS;
 		

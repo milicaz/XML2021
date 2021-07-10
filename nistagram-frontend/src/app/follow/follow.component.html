@@ -1,4 +1,5 @@
 <div class="container row" *ngFor="let profile of profiles">
+  <span *ngIf = "!profile.show">
   <div class="col-sm-6">
     <img src="{{image}}{{profile.picByte}}" width="40%" height="80%">
   </div>
@@ -6,11 +7,14 @@
   <div class="col-sm-6">
     <div class="form-group row">
       <label class="col-sm-4 col-form-label">First name: </label>
-      <span><input type="text" [(ngModel)]="profile.firstName" class="col-sm-4" class="form-control-plaintext" name="firstName" readonly></span>
+      <span><input type="text" [(ngModel)]="profile.firstName" class="col-sm-4" class="form-control-plaintext"
+          name="firstName" readonly></span>
       <label class="col-sm-4 col-form-label">Last name:</label>
-      <span><input type="text" [(ngModel)]="profile.lastName" class="col-sm-4" class="form-control-plaintext" name="lastName" readonly></span>
+      <span><input type="text" [(ngModel)]="profile.lastName" class="col-sm-4" class="form-control-plaintext"
+          name="lastName" readonly></span>
       &nbsp;&nbsp;
-      <button class="col-sm-3 col-form-button" (click)="addFriend(profile.id)">Follow</button>
-    </div>
+        <button class="col-sm-12 col-form-button" (click)="addFriend(profile.id)">Follow</button>
   </div>
+  </div>
+</span>
 </div>

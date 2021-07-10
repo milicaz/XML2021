@@ -26,6 +26,7 @@ export class ProfileModel {
   public privacy: boolean;
   public picByte: string;
   public retrievedImage: string;
+  public show: boolean;
 
   constructor(){}
 }

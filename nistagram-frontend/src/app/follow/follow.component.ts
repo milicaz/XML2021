@@ -19,6 +19,7 @@ export class FollowComponent implements OnInit {
   u : any
   log = true
   username : any
+  p:any
 
 
   firend : Friends
@@ -39,6 +40,7 @@ export class FollowComponent implements OnInit {
           for(this.u in data) {
             if(this.username !== data[this.u].username){
               this.profile = data[this.u]
+              this.profile.show = false
               this.profiles.push(this.profile)
             }
             else{
@@ -60,19 +62,24 @@ export class FollowComponent implements OnInit {
     //   }
     // )
 
+    
+
     this.profileService.executeGetOneProfile(id).subscribe(
       data => {
-        this.log = false
+        console.log("data.show je " + data.show)
         this.firend = new Friends(id, data.username, data.firstName, data.lastName, data.email, data.dateOfBirth, data.phone, data.privacy, data.picByte, this.username)
         this.friendService.executePostFriends(this.firend).subscribe(
           response => {
             console.log("response je : " + response)
+            for(this.p in this.profiles) {
+              if(this.profiles[this.p].id === id) {
+                this.profiles[this.p].show = true
+              }
+            }
           }
         )
       }
     )
-    
   }
-
 
 }

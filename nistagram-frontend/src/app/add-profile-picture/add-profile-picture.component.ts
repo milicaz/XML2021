@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Friends, FriendsService } from '../service/friends.service';
 import { LoginDataService } from '../service/login-data.service';
 import { ProfileModel, ProfileService, User } from '../service/profile.service';
 
@@ -23,14 +24,20 @@ export class AddProfilePictureComponent implements OnInit {
   user : User
   id: any
 
+  friendId: any
+  friendUname: any
+
   private selectedFile;
   imgURL: any;
+
+  friend : Friends
 
   constructor(
     private profileService : ProfileService,
     private router : Router,
     private http : HttpClient,
-    private loginService : LoginDataService
+    private loginService : LoginDataService,
+    private friendService : FriendsService
   ) { }
 
   ngOnInit() {
@@ -97,6 +104,31 @@ export class AddProfilePictureComponent implements OnInit {
               console.log("D je: " + d)
             }
           )
+
+          this.friendService.executeFindByUsername(this.username).subscribe(
+            d => {
+              this.friendId = d.id
+              this.friendUname = d.friendUname
+              this.friend = new Friends(this.friendId, this.username, this.profile.firstName, this.profile.lastName, 
+                this.profile.email, this.profile.dateOfBirth, this.profile.phone, this.profile.privacy, this.profile.picByte, this.friendUname)
+                console.log("PicByte profila je: " + this.profile.picByte)
+              console.log("Id je :" + this.friend.id)
+              console.log("Username je : " + this.friend.username)
+              this.friendService.executeUpdateFriends(this.friend.username, this.friend).subscribe(
+                r => {
+                  console.log("updated friend je :" + r)
+                  this.friendService.executeFindByUsername(this.friend.username).subscribe(
+                    res => {
+                      console.log("Ime je: " + res.firstName)
+                      console.log("PicByte prijatelja je :" + res.picByte)
+                    }
+                  )
+                }
+             )
+            }
+          )
+
+
 
         }
       )

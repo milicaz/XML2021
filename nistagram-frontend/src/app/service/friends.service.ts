@@ -38,4 +38,12 @@ export class FriendsService {
   getFriends(username){
     return this.http.get<Friends>(`http://localhost:8800/friends/getFUsername/${username}`);
   }
+
+  executeUpdateFriends(username, friend) {
+    return this.http.put<Friends>('http://localhost:8800/friends/update/' + username, friend)
+  }
+
+  executeFindByUsername(username) {
+    return this.http.get<Friends>('http://localhost:8800/friends/find/' + username)
+  }
 }

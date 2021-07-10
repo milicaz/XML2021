@@ -32,6 +32,25 @@ public class Friends {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public Friends(Long id, String username, String firstName, String lastName, String email, String dateOfBirth,
+			String phone, String privacy, byte[] picByte, String friendUname) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+		this.phone = phone;
+		this.privacy = privacy;
+		this.picByte = picByte;
+		this.friendUname = friendUname;
+	}
+
+
 
 	public Long getId() {
 		return id;

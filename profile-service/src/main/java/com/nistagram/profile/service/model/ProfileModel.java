@@ -28,7 +28,26 @@ public class ProfileModel {
 	@Column(name = "picByte", length = 300000)
 	private byte[] picByte;
 	
+	private Boolean show;
 	
+	
+	
+	
+
+	public ProfileModel(Long id, String username, String firstName, String lastName, String email, String dateOfBirth,
+			String phone, Boolean privacy, byte[] picByte, Boolean show) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+		this.phone = phone;
+		this.privacy = privacy;
+		this.picByte = picByte;
+		this.show = show;
+	}
 
 	public ProfileModel(Long id, String username, String firstName, String lastName, String email, String dateOfBirth,
 			String phone, Boolean privacy, byte[] picByte) {
@@ -119,6 +138,14 @@ public class ProfileModel {
 
 	public void setPicByte(byte[] picByte) {
 		this.picByte = picByte;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 	
 	

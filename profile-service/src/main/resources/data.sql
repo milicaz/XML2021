@@ -2,6 +2,8 @@ INSERT INTO `xml`.`profiles` (`id`, `date_of_birth`, `email`, `first_name`, `las
 INSERT INTO `xml`.`profiles` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('2', 'date', 'mail1@mail.com', 'Pera', 'Peric', '11111', true, 'user');
 INSERT INTO `xml`.`profiles` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('3', 'date', 'mail2@mail.com', 'Pera', 'Peric', '11111', true, 'agent');
 
-INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('1', '2021-07-01', 'mail@mail.com', 'Pera', 'Peric', '11111', true, 'admin');
-INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('2', '2021-07-01', 'mail1@mail.com', 'Pera', 'Peric', '11111', true, 'user');
-INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('3', '2021-07-01', 'mail2@mail.com', 'Pera', 'Peric', '11111', true, 'agent');
+INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('1', '2021-07-01', 'mail@mail.com', 'Pera', 'Peric', '11111', false, 'user1');
+INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('2', '2021-07-01', 'mail1@mail.com', 'Pera', 'Peric', '11111', false, 'user');
+INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('3', '2021-07-01', 'mail2@mail.com', 'Pera', 'Peric', '11111', false, 'user2');
+INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('4', '2021-07-01', 'mail2@mail.com', 'Pera', 'Peric', '11111', false, 'user3');
+INSERT INTO `xml`.`profile_models` (`id`, `date_of_birth`, `email`, `first_name`, `last_name`, `phone`, `privacy`, `username`) VALUES ('5', '2021-07-01', 'mail2@mail.com', 'Pera', 'Peric', '11111', false, 'user4');
