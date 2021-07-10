@@ -34,4 +34,8 @@ export class FriendsService {
   executePostFriends(friend){
     return this.http.post<Friends>('http://localhost:8800/friends/add', friend)
   }
+
+  getFriends(username){
+    return this.http.get<Friends>(`http://localhost:8800/friends/getFUsername/${username}`);
+  }
 }

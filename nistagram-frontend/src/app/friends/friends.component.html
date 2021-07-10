@@ -1,3 +1,26 @@
-<p>
-  friends works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="container" *ngFor="let friend of friends">
+        <div class="form-group row">
+          <img src="{{image}}{{friend.picByte}}" alt="..." width="100px;" height="100px;">
+          <span>{{friend.firstName}} {{friend.lastName}}</span>
+        </div>
+        <div class="form-group row">
+          <button class="btn btn-info" (click)="viewPosts(friend.username)">See posts</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <!--Prikaz postova pracenog korisnika-->
+      <div class="container">
+        <div class="card" style="width: 18rem;" *ngFor="let post of posts">
+          <img class="card-img-top" src="{{post.retrievedImage}}" alt="...">
+          <div class="card-body">
+            <p class="card-text">{{post.caption}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
